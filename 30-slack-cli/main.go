@@ -1,16 +1,16 @@
 package main
 
 import (
-	"fmt"
 	"bytes"
-	"os"
-	"net/http"
 	"encoding/json"
+	"fmt"
+	"net/http"
+	"os"
 )
 
 // Message represents a Slack API message
 type Message struct {
-	Text string `json:"text"`	
+	Text string `json:"text"`
 }
 
 func main() {
@@ -19,7 +19,7 @@ func main() {
 		Text: "Never gonna give you up!",
 	}
 
-	bb, _ := json.Marshal(&message)
+	bb, _ := json.Marshal(message)
 	http.Post(webhook, "application/json", bytes.NewBuffer(bb))
 
 	fmt.Println("success!")
