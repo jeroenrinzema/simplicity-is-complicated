@@ -6,11 +6,11 @@ import (
 )
 
 func worker(id int, jobs <-chan int, results chan<- int) {
-	for j := range jobs {
-		fmt.Println("worker", id, "started  job", j)
+	for job := range jobs {
+		fmt.Println("worker", id, "started  job", job)
 		time.Sleep(time.Second)
-		fmt.Println("worker", id, "finished job", j)
-		results <- j * 2
+		fmt.Println("worker", id, "finished job", job)
+		results <- job * 2
 	}
 }
 
@@ -22,9 +22,10 @@ func main() {
 		go worker(w, jobs, results)
 	}
 
-	for j := 1; j <= 5; j++ {
-		jobs <- j
+	for job := 1; job <= 5; job++ {
+		jobs <- job
 	}
+
 	close(jobs)
 
 	for a := 1; a <= 5; a++ {
