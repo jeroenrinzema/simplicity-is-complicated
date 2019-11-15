@@ -19,6 +19,7 @@ func main() {
 	http.ListenAndServe(":8080", nil)
 }
 
+// curl "localhost:8080/?[1-100]"
 func request(requests chan string) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		requests <- "hello world"
